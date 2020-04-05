@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Game.Views.Battle.BattleThemePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <FlexLayout x:Name="flexLayout"
+                        Wrap="Wrap"
+                        JustifyContent="SpaceAround"
+                        AlignContent="SpaceAround">
+                <StackLayout Style="{StaticResource CardImageTextBox}">
+                    <Label
+							Text="Choose your characters"
+							Style="{StaticResource CenterMessageStyle}"
+							HorizontalOptions="CenterAndExpand"
+							FontSize="Small"
+							LineBreakMode="WordWrap"/>
+                    <Frame CornerRadius="200"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                        IsClippedToBounds="True">
+                        <ImageButton
+						Source="powerpuff_girls.png"
+						Style="{StaticResource ImageLargeStyle}"
+						Clicked="Pick_Characters_Clicked"
+						 VerticalOptions="CenterAndExpand"
+						 HorizontalOptions="CenterAndExpand"
+                            CornerRadius="25">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                            Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                            Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+
+                    </Frame>
+                    
+                </StackLayout>
+            </FlexLayout>
+
+            <Label
+				Text="Choose your Battle Field Theme"
+                Padding="0,30,0,0"
+				Style="{StaticResource CenterMessageStyle}"
+				HorizontalOptions="CenterAndExpand"
+				FontSize="Small"
+				LineBreakMode="WordWrap"/>
+
+            <Grid RowSpacing="1"
+                    ColumnSpacing="2"
+                    HorizontalOptions="CenterAndExpand" 
+                    Padding="0,-120,0,-120">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <ListView x:Name="ImageView"   
+                          Grid.Row ="0" Grid.Column="0" 
+                          Rotation="270" RowHeight="100" 
+                          ItemSelected="OnThemeImageSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout>
+                                        <Image Source="{Binding Url}"
+                                               WidthRequest="100" 
+                                               HeightRequest ="100"
+                                               MinimumHeightRequest = "80"
+                                               MinimumWidthRequest = "80"
+                                               Rotation="90"></Image>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+            <StackLayout HorizontalOptions="CenterAndExpand">
+                <Button x:Name="BeginBattleButton" Text="Begin Battle" Clicked="BeginBattle_Clicked" Style="{StaticResource PrimaryButtonStyle}" IsEnabled="False"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

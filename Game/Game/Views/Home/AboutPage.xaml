@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Game.Views.AboutPage"
+             Title="About">
+
+    <ScrollView
+      Padding="10,10,10,10"
+      VerticalOptions="Start"
+      HorizontalOptions="FillAndExpand"
+      Orientation="Vertical">
+
+        <StackLayout>
+
+            <StackLayout Style="{StaticResource VerticalStack}" HorizontalOptions="CenterAndExpand">
+                <Frame CornerRadius="200"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       IsClippedToBounds="True">
+                    <Image Source="powerpuff_girls.png" Style="{StaticResource ImageLargeStyle}"></Image>
+                </Frame>
+                <Label Text="GamesVille" Style="{StaticResource HeaderStyle}" HorizontalOptions="Center"  HorizontalTextAlignment="Center" />
+                <Label Text="Code Warriors" Style="{StaticResource MessageStyle}" HorizontalOptions="Center"  HorizontalTextAlignment="Center" />
+                <Label x:Name="CurrentDateTime" Style="{StaticResource MessageStyle}" HorizontalOptions="Center"  HorizontalTextAlignment="Center" />
+            </StackLayout>
+
+            <!--Database Settings Frame-->
+
+            <StackLayout Style="{StaticResource HorizontalStack}">
+
+                <Label
+                        Text="Database Settings"
+                        Style="{DynamicResource DebugSwitchLabel}"/>
+
+                <Switch
+                        x:Name="DatabaseSettingsSwitch"
+                        HorizontalOptions="EndAndExpand"
+                        Toggled="DatabaseSettingsSwitch_OnToggled"
+                        IsToggled="False"/>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource VerticalStack}"
+                        x:Name="DatabaseSettingsFrame"
+                        IsVisible="False">
+
+                <!--Database Settings-->
+                <StackLayout Style="{StaticResource HorizontalStack}"
+                                    Padding="50,0,0,0">
+
+                    <Label Text="SQL Data Source" />
+
+                    <Switch
+                        HorizontalOptions="Start" 
+                        VerticalOptions="Center"
+                        x:Name="DataSourceValue"
+                        IsToggled="{Binding ItemIndexViewModel.Instance.CurrentDataSource}"
+                        Toggled="DataSource_Toggled" 
+                        />
+
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource HorizontalStack}"
+                                    Padding="50,0,0,0">
+
+                    <Label Text="Wipe Data List" />
+
+                    <Button
+                        Text="Wipe"
+                        Clicked="WipeDataList_Clicked"
+                        Style="{StaticResource PrimaryButtonStyle}"/>
+
+                </StackLayout>
+            </StackLayout>
+
+            <!--Debug Settings Frame-->
+            <StackLayout Style="{StaticResource HorizontalStack}">
+
+                <Label
+                    Text="Debug Settings"
+                    Style="{DynamicResource DebugSwitchLabel}"/>
+
+                <Switch
+                    x:Name="DebugSettingsSwitch"
+                    HorizontalOptions="EndAndExpand"
+                    Toggled="DebugSettingsSwitch_OnToggled"
+                    IsToggled="False"/>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource VerticalStack}" x:Name="DebugSettingsFrame" IsVisible="False">
+
+                <StackLayout Style="{StaticResource VerticalStack}" Padding="5,0,0,0">
+
+                    <Label Text="More Debug Settings to come..." />
+
+                    <StackLayout Style="{StaticResource VerticalStack}">
+                        <StackLayout Style="{StaticResource HorizontalStack}" HorizontalOptions="FillAndExpand">
+                            <Label
+                                Text="Number of Items "
+                                HorizontalTextAlignment="Start"
+                                HorizontalOptions="Start"
+                                Style="{DynamicResource LabelStyle}"
+                                />
+
+                            <Entry
+                                x:Name="ServerItemValue"
+                                Text="1" 
+                                FontSize="Micro"
+                                MaxLength="5"
+                                CursorPosition="0"
+                                SelectionLength = "5"
+                                Keyboard="Numeric"
+                                WidthRequest="50"
+                                HorizontalOptions="FillAndExpand"
+                                Style="{DynamicResource EntryStyle}"
+                                />
+                        </StackLayout>
+
+                        <StackLayout Style="{StaticResource HorizontalStack}">
+                            <Button
+                                Text="Get"
+                                Clicked="GetItemsGet_Command"/>
+
+                            <Button
+                                Text="Post"
+                                Clicked="GetItemsPost_Command"/>
+                        </StackLayout>
+                        <StackLayout Style="{StaticResource HorizontalStack}">
+
+                            <Label
+                                Text="Reincarnate Character"
+                                Style="{DynamicResource DebugSwitchLabel}"/>
+
+                            <Switch
+                                x:Name="ExtraLife"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="ExtraLife_OnToggled"
+                                IsToggled="False"/>
+                        </StackLayout>
+
+                        <Label Text="Character Settings" />
+
+                        <StackLayout Style="{StaticResource HorizontalStack}" HorizontalOptions="FillAndExpand">
+                            <Label
+                                Text="Set a Value for hit "
+                                HorizontalTextAlignment="Start"
+                                HorizontalOptions="Start"
+                                Style="{DynamicResource LabelStyle}"
+                                />
+
+                            <Entry
+                                x:Name="CharacterHitValueEntry"
+                                Text="1" 
+                                FontSize="Micro"
+                                MaxLength="5"
+                                CursorPosition="0"
+                                SelectionLength = "5"
+                                Keyboard="Numeric"
+                                WidthRequest="50"
+                                HorizontalOptions="FillAndExpand"
+                                Style="{DynamicResource EntryStyle}"
+                                TextChanged="CharacterHitValue_Changed"
+                                />
+                        </StackLayout>
+
+                        <StackLayout Style="{StaticResource HorizontalStack}">
+
+                            <Label
+                                Text="Force 1 and Miss"
+                                Style="{DynamicResource DebugSwitchLabel}"/>
+
+                            <Switch
+                                x:Name="CharacterForceMiss"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="CharacterForceMiss_OnToggled"
+                                IsToggled="False"/>
+                        </StackLayout>
+
+                        <StackLayout Style="{StaticResource HorizontalStack}">
+
+                            <Label
+                                Text="Force 20 and Hit"
+                                Style="{DynamicResource DebugSwitchLabel}"/>
+
+                            <Switch
+                                x:Name="CharacterForceHit"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="CharacterForceHit_OnToggled"
+                                IsToggled="False"/>
+                        </StackLayout>
+
+                        <StackLayout Style="{StaticResource HorizontalStack}">
+
+                            <Label
+                                Text="I feel good"
+                                Style="{DynamicResource DebugSwitchLabel}"/>
+
+                            <Switch
+                                x:Name="IFeelGood"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="IFeelGood_OnToggled"
+                                IsToggled="False"/>
+                        </StackLayout>
+
+                      
+
+                        <Label Text="Monster Settings" />
+
+                        <StackLayout Style="{StaticResource HorizontalStack}" HorizontalOptions="FillAndExpand">
+                            <Label
+                                Text="Set a Value for hit "
+                                HorizontalTextAlignment="Start"
+                                HorizontalOptions="Start"
+                                Style="{DynamicResource LabelStyle}"
+                                />
+
+                            <Entry
+                                x:Name="MonsterHitValueEntry"
+                                Text="1" 
+                                FontSize="Micro"
+                                MaxLength="5"
+                                CursorPosition="0"
+                                SelectionLength = "5"
+                                Keyboard="Numeric"
+                                WidthRequest="50"
+                                HorizontalOptions="FillAndExpand"
+                                Style="{DynamicResource EntryStyle}"
+                                TextChanged="MonsterHitValue_Changed"
+                                />
+                        </StackLayout>
+
+                        <StackLayout Style="{StaticResource HorizontalStack}">
+
+                            <Label
+                                Text="Force 1 and Miss"
+                                Style="{DynamicResource DebugSwitchLabel}"/>
+
+                            <Switch
+                                x:Name="MonsterForceMiss"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="MonsterForceMiss_OnToggled"
+                                IsToggled="False"/>
+                        </StackLayout>
+
+                        <StackLayout Style="{StaticResource HorizontalStack}">
+
+                            <Label
+                                Text="Force 20 and Hit"
+                                Style="{DynamicResource DebugSwitchLabel}"/>
+
+                            <Switch
+                                x:Name="MonsterForceHit"
+                                HorizontalOptions="EndAndExpand"
+                                Toggled="MonsterForceHit_OnToggled"
+                                IsToggled="False"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

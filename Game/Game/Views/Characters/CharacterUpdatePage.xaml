@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local_helpers="clr-namespace:Game.Helpers"
+             xmlns:local="using:Game.Models"
+             xmlns:local_enum="clr-namespace:Game.Models"
+             x:Class="Game.Views.CharacterUpdatePage"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local_helpers:StringEnumConverter x:Key="StringEnum"/>
+            <local_helpers:IntStringConverter x:Key="Int_String"/>
+            <local_helpers:ItemLocationPickerConverter x:Key="ItemGUID_Name"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Style="{StaticResource OuterBoxStack}"
+                Spacing="10" Padding="0,0,20,0">
+
+            <Label Text="Update Character" Style="{StaticResource HeaderStyle}"/>
+
+            <Image Source="{Binding Data.ImageURI}" Style="{StaticResource ImageLargeStyle}" HorizontalOptions="CenterAndExpand" x:Name="CharacterImage"/>
+
+            <Label
+                Text="Update the image for your character: " 
+                Style="{StaticResource LabelStyle}"/>
+
+            <Grid RowSpacing="1"
+                    ColumnSpacing="2"
+                    HorizontalOptions="Start" 
+                      Padding="90,-80,-80,-80">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+
+                <ListView x:Name="ImageView"   Grid.Row ="0" Grid.Column="0" Rotation="270" RowHeight="40" ItemSelected="OnCharacterImageSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout>
+                                        <Image Source="{Binding Url}"
+                                                WidthRequest="40" 
+                                                HeightRequest ="40"
+                                                MinimumHeightRequest = "40"
+                                                MinimumWidthRequest = "40"
+                                                Rotation="90"></Image>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <Grid
+                RowSpacing="1"
+                ColumnSpacing="2"
+                VerticalOptions="Center">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0"
+                            Text="Name" 
+                            Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Row="0" Grid.Column="1"
+                            Style="{StaticResource ValidationLabelStyle}" 
+                            x:Name="NameValidationLabel"/>
+                </Grid>
+
+                <Entry Grid.Row="0" Grid.Column="1"
+                            Text="{Binding Data.Name}"  
+                            x:Name="NameEntry"
+                            Style="{StaticResource EntryStyle}"
+                            TextChanged="NameEntry_Changed"/>
+
+                <Label Grid.Row="1" Grid.Column="0"
+                        Text="Description" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Entry Grid.Row="1" Grid.Column="1"
+                        Text="{Binding Data.Description}" 
+                        Style="{StaticResource EntryStyle}"/>
+
+                <Label Grid.Row="2" Grid.Column="0"
+                        Text="SpecialAbility" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="2" Grid.Column="1"
+                        ItemsSource="{x:Static local_helpers:SpecialAbilityEnumHelper.GetSpecialAbilityList}" 
+                        SelectedItem="{Binding Data.SpecialAbility, Converter={StaticResource StringEnum}, Mode=TwoWay}" 
+                        x:Name="SpecialAbilityPicker"/>
+
+                <Label Grid.Row="3" Grid.Column="0"
+                        Text="Attack" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="3" Grid.Column="1" 
+                        SelectedItem="{Binding Data.Attack, Converter={StaticResource Int_String}, Mode=TwoWay}" 
+                        x:Name="AttackPicker">
+                    <Picker.Items>
+                        <x:String>0</x:String>
+                        <x:String>5</x:String>
+                        <x:String>10</x:String>
+                        <x:String>20</x:String>
+                        <x:String>25</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Label Grid.Row="4" Grid.Column="0"
+                        Text="Defense" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="4" Grid.Column="1" 
+                        SelectedItem="{Binding Data.Defense, Converter={StaticResource Int_String}, Mode=TwoWay}" 
+                        x:Name="DefensePicker">
+                    <Picker.Items>
+                        <x:String>0</x:String>
+                        <x:String>5</x:String>
+                        <x:String>10</x:String>
+                        <x:String>20</x:String>
+                        <x:String>25</x:String>
+                    </Picker.Items>
+                </Picker>
+
+                <Label Grid.Row="5" Grid.Column="0"
+                        Text="Items Holding" Grid.ColumnSpan="2"
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Label Grid.Row="6" Grid.Column="0"
+                        Text="Head" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="6" Grid.Column="1" 
+                        ItemsSource="{x:Static local_helpers:ItemModelHelper.GetHeadItemList}" 
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ItemGUID_Name}}"
+                        SelectedItem="{Binding Data.Head, Mode=TwoWay}" 
+                        x:Name="HeadItemPicker"/>
+
+                <Label Grid.Row="7" Grid.Column="0"
+                        Text="Necklace" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="7" Grid.Column="1" 
+                        ItemsSource="{x:Static local_helpers:ItemModelHelper.GetNecklaceItemList}" 
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ItemGUID_Name}}"
+                        SelectedItem="{Binding Data.Necklace, Mode=TwoWay}" 
+                        x:Name="NecklaceItemPicker"
+                        />
+
+                <Label Grid.Row="8" Grid.Column="0"
+                        Text="Primary Hand" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="8" Grid.Column="1" 
+                        ItemsSource="{x:Static local_helpers:ItemModelHelper.GetPrimaryHandItemList}" 
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ItemGUID_Name}}"
+                        SelectedItem="{Binding Data.PrimaryHand, Mode=TwoWay}" 
+                        x:Name="PrimaryHandItemPicker"
+                        />
+
+                <Label Grid.Row="9" Grid.Column="0"
+                        Text="Off Hand" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="9" Grid.Column="1" 
+                        ItemsSource="{x:Static local_helpers:ItemModelHelper.GetOffHandItemList}" 
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ItemGUID_Name}}"
+                        SelectedItem="{Binding Data.OffHand, Mode=TwoWay}" 
+                        x:Name="OffHandItemPicker"
+                        />
+
+                <Label Grid.Row="10" Grid.Column="0"
+                        Text="Right Finger" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="10" Grid.Column="1" 
+                        ItemsSource="{x:Static local_helpers:ItemModelHelper.GetRightFingerItemList}" 
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ItemGUID_Name}}"
+                        SelectedItem="{Binding Data.RightFinger, Mode=TwoWay}" 
+                        x:Name="RightFingerItemPicker"
+                        />
+
+                <Label Grid.Row="11" Grid.Column="0"
+                        Text="Left Finger" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="11" Grid.Column="1" 
+                        ItemsSource="{x:Static local_helpers:ItemModelHelper.GetLeftFingerItemList}" 
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ItemGUID_Name}}"
+                        SelectedItem="{Binding Data.LeftFinger, Mode=TwoWay}" 
+                        x:Name="LeftFingerItemPicker"
+                        />
+
+                <Label Grid.Row="12" Grid.Column="0"
+                        Text="Feet" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <Picker Grid.Row="12" Grid.Column="1" 
+                        ItemsSource="{x:Static local_helpers:ItemModelHelper.GetFeetItemList}" 
+                        ItemDisplayBinding="{Binding ., Converter={StaticResource ItemGUID_Name}}"
+                        SelectedItem="{Binding Data.Feet, Mode=TwoWay}" 
+                        x:Name="FeetItemPicker"
+                        />
+
+            </Grid>
+            <StackLayout Style="{StaticResource VerticalStack}" HorizontalOptions="FillAndExpand">
+
+                <Label 
+                        Text="Level" 
+                        Style="{StaticResource LabelStyle}"/>
+
+                <StackLayout Style="{StaticResource HorizontalStack}" Padding="10,0,10,0">
+
+                    <Label 
+                            Text="{Binding Data.Level}" 
+                            x:Name="LevelValue"
+                            Style="{StaticResource ValueStyle}"
+                            Padding="0,0,10,0"
+                            HorizontalOptions="End"
+                            HorizontalTextAlignment="End"/>
+
+                    <Stepper 
+                            Value="{Binding Data.Level, Mode=TwoWay}"
+                            ValueChanged="Level_OnStepperValueChanged"/>
+
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource VerticalStack}" HorizontalOptions="FillAndExpand">
+                    <Label 
+                            Text="Max health: " 
+                            Style="{StaticResource LabelStyle}"/>
+
+                    <Label
+                        x:Name="MaxLevelLabel"
+                        Text="{Binding Data.MaxHealth, Converter={StaticResource Int_String}, Mode=TwoWay}"
+                        Style="{StaticResource LabelStyle}"/>
+
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button
+                        Text="Save"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Clicked="Save_Clicked"
+                        x:Name="SaveButton"/>
+
+                    <Button
+                        Text="Cancel"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Clicked="Cancel_Clicked"/>
+                </StackLayout>
+
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

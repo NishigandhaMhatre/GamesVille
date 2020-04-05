@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Game.Views.PickItemsPage"
+             Title="Pick Items">
+
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource VerticalStack}">
+            <ListView x:Name="ItemsListView" 
+                    ItemsSource="{Binding DroppedItemsList}"
+                    CachingStrategy="RecycleElement"
+                    HasUnevenRows="true"
+                    Margin="5,0,5,0"
+                    RowHeight="80"
+                    >
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="5" RowSpacing="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Image  Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                                        Source="{Binding ImageURI}"
+                                        Style="{StaticResource ImageSmallStyle}"
+                                        VerticalOptions="CenterAndExpand"/>
+
+                                <Label Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding Name}" 
+                                       Style="{StaticResource ListStyle}"/>
+
+                                <StackLayout Grid.Column="1" Grid.Row="1"
+                                    Orientation="Horizontal">
+
+                                    <Label 
+                                       Text="{Binding Attribute}" 
+                                       Style="{StaticResource ListStyle}"/>
+
+                                    <Label Text="{Binding Value}" 
+                                        Style="{StaticResource ListStyle}"/>
+
+                                </StackLayout>
+
+                                <Label Grid.Column="1" Grid.Row="2"
+                                       Text="{Binding Description}" 
+                                       Style="{StaticResource ListStyle}"
+                                       FontSize="Micro"/>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Clicked="AutoPickUpButton_Clicked" Text="Auto PickUp" Style="{StaticResource PrimaryButtonStyle}"></Button>
+                <Button Clicked="CloseButton_Clicked" Text="Close" Style="{StaticResource PrimaryButtonStyle}"></Button>
+            </StackLayout>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

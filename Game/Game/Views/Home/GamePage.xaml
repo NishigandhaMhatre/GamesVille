@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="Game.Views.GamePage"
+			 >
+
+    <ContentPage.Content>
+
+        <ScrollView Orientation="Vertical" HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never" Padding="10">
+
+            <FlexLayout x:Name="flexLayout"
+						Wrap="Wrap"
+						JustifyContent="SpaceAround"
+						AlignContent="SpaceAround">
+
+                <StackLayout>
+                    <Frame CornerRadius="200"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                        IsClippedToBounds="True">
+                        <ImageButton
+						Source="TownsVille.png"
+						Style="{StaticResource ImageLargeStyle}"
+						Clicked="VillageButton_Clicked"
+						VerticalOptions="CenterAndExpand"
+						HorizontalOptions="CenterAndExpand"
+                            CornerRadius="25">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                            Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                            Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+                    </Frame>
+                    <Label
+							Text="Townsville City"
+							Style="{StaticResource CenterMessageStyle}"
+							HorizontalOptions="CenterAndExpand"
+							FontSize="Small"
+							LineBreakMode="WordWrap"/>
+                </StackLayout>
+
+                <StackLayout
+						Style="{StaticResource CardImageTextBox}">
+                    <Frame CornerRadius="200"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0">
+                        <ImageButton
+						Source="CityAttack.png"
+						Style="{StaticResource ImageLargeStyle}"
+						Clicked="DungeonButton_Clicked"
+						 VerticalOptions="CenterAndExpand"
+						 HorizontalOptions="CenterAndExpand"
+                            CornerRadius="25">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                            Value="1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Pressed">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale"
+                            Value="0.8" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </ImageButton>
+                    </Frame>
+
+                    <Label
+							Text="Save TownsVille"
+							Style="{StaticResource CenterMessageStyle}"
+							HorizontalOptions="CenterAndExpand"
+							FontSize="Small"
+							LineBreakMode="WordWrap"/>
+                </StackLayout>
+                <StackLayout
+						Style="{StaticResource CardImageTextBox}">
+                    <Frame CornerRadius="200"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       HorizontalOptions="Center"
+                       Padding="0">
+                        <ImageButton
+						Source="AutoBattle.png"
+						Style="{StaticResource ImageLargeStyle}"
+						Clicked="AutobattleButton_Clicked"
+						 VerticalOptions="CenterAndExpand"
+						 HorizontalOptions="CenterAndExpand"
+                         CornerRadius="25">
+                        </ImageButton>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale"
+                            Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Property="Scale"
+                            Value="0.8" />
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Frame>
+                    <Label
+							Text="AutoBattle"
+							Style="{StaticResource CenterMessageStyle}"
+							HorizontalOptions="CenterAndExpand"
+							FontSize="Small"
+							LineBreakMode="WordWrap"/>
+                </StackLayout>
+            </FlexLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

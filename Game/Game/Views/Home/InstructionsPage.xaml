@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 x:Class="Game.Views.InstructionsPage"
+			 Title="Game Instructions">
+
+    <ContentPage.Content>
+
+        <ScrollView Orientation="Vertical" HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never" Padding="10">
+
+            <StackLayout
+					Style="{StaticResource CardImageTextBox}">
+
+                <Label
+					Text="How to save Townsville."
+					Style="{StaticResource CenterMessageStyle}"
+					HorizontalOptions="CenterAndExpand"
+					FontSize="Large"
+					LineBreakMode="WordWrap"/>
+
+                <Label
+					Text="Select the characters you want for your battle. You 
+                          can also create your own characters. Select items for 
+                          characters which help them to fight against the monsters in TownsVille. You can select a theme where you want to play the battle. The game then starts with your selected characters and you get to fight against the bad guys in the town and kill them with your power."
+					Style="{StaticResource CenterMessageStyle}"
+					HorizontalOptions="CenterAndExpand"
+					FontSize="Small"
+					LineBreakMode="WordWrap"
+                    />
+
+                <Button
+					Text="Home"
+                    Style="{StaticResource PrimaryButtonStyle}"
+					Clicked="HomeButton_Clicked"/>
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Game.Views.Characters.CharacterIndexPage">
+    <ContentPage.Content>
+        <StackLayout
+            Style="{StaticResource OuterBoxStack}"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+         >
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Characters"   
+                VerticalOptions="Start" 
+                HorizontalOptions="StartAndExpand"
+                Style="{StaticResource HeaderStyle}"/>
+                <Button
+                Text="Add Character"
+                Style="{StaticResource PrimaryButtonStyle}"
+                Clicked="AddCharacter_Clicked"
+                HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <ListView x:Name="CharacterListView" 
+                    ItemsSource="{Binding Dataset}"
+                    IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                    RefreshCommand="{Binding LoadItemsCommand}"
+                    ItemSelected="OnCharacterSelected"
+                    CachingStrategy="RecycleElement"
+                    HasUnevenRows="true"
+                    Margin="5,0,5,0"
+                    RowHeight="80"
+                    >
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="5" RowSpacing="1" Padding="5" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Image  Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                                        Source="{Binding ImageURI}"
+                                        Style="{StaticResource ImageMediumStyle}"
+                                        VerticalOptions="CenterAndExpand"/>
+
+                                <Label Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding Name}" 
+                                       Style="{StaticResource ListStyle}"/>
+
+                                <StackLayout Grid.Column="1" Grid.Row="1"
+                                    Orientation="Horizontal">
+
+                                    <Label 
+                                       Text="Special-Ability: " 
+                                       Style="{StaticResource ListStyle}"
+                                       FontSize="Micro"/>
+
+                                    <Label Text="{Binding SpecialAbility}" 
+                                        Style="{StaticResource ListStyle}"
+                                        FontSize="Micro"/>
+
+                                </StackLayout>
+
+                                <Label Grid.Column="1" Grid.Row="2"
+                                       Text="{Binding Description}" 
+                                       Style="{StaticResource ListStyle}"
+                                       FontSize="Micro"/>
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

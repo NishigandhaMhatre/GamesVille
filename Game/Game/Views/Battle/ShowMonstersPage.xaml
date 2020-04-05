@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Game.Views.Battle.ShowMonstersPage">
+    <ContentPage.Content>
+        <StackLayout Style="{StaticResource OuterBoxStack}">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Monsters you will face!!"   
+                VerticalOptions="Start" 
+                HorizontalOptions="StartAndExpand"
+                Style="{StaticResource HeaderStyle}"/>
+                <Button
+                Text="Bring it on"
+                Clicked="Go_To_Battle"
+                Style="{StaticResource PrimaryButtonStyle}"
+                HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+
+            <ListView x:Name="MonstersListView" 
+                      ItemsSource="{Binding SelectedMonsterList}"
+                    CachingStrategy="RecycleElement"
+                    HasUnevenRows="true"
+                    Margin="5,0,5,0"
+                    RowHeight="80"
+                    >
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid ColumnSpacing="1" RowSpacing="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="100"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/> 
+                                </Grid.RowDefinitions>
+
+
+                                <Image  Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"
+                                        Source="{Binding ImageURI}"
+                                        Style="{StaticResource ImageMediumStyle}"
+                                        VerticalOptions="CenterAndExpand"/>
+
+                                <Label Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding Name}" 
+                                       Style="{StaticResource ListStyle}"/>
+                                <StackLayout Grid.Column="2" Grid.Row="0" 
+                                             Orientation="Vertical"
+                                             HorizontalOptions="End">
+                                    <Grid ColumnSpacing="1" RowSpacing="1" BackgroundColor="#206980" >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <StackLayout Grid.Column="0" Grid.Row="0"
+                                    Orientation="Horizontal">
+
+                                            <Label 
+                                       Text="Level: " 
+                                       Style="{StaticResource ListStyle}"
+                                       FontSize="Micro"
+                                                Padding="10,0,0,0" TextColor="White"/>
+
+                                            <Label Text="{Binding Level}" 
+                                        Style="{StaticResource ListStyle}"
+                                        FontSize="Micro" TextColor="White"/>
+
+                                        </StackLayout>
+
+                                        <StackLayout Grid.Column="0" Grid.Row="1"
+                                    Orientation="Horizontal">
+
+                                            <Label 
+                                       Text="Attack: " 
+                                       Style="{StaticResource ListStyle}"
+                                       FontSize="Micro" Padding="10,0,0,0" TextColor="White"/>
+
+                                            <Label Text="{Binding Attack}" 
+                                        Style="{StaticResource ListStyle}"
+                                        FontSize="Micro" TextColor="White"/>
+
+                                        </StackLayout>
+
+                                        <StackLayout Grid.Column="0" Grid.Row="2"
+                                    Orientation="Horizontal">
+
+                                            <Label 
+                                       Text="Health: " 
+                                       Style="{StaticResource ListStyle}"
+                                       FontSize="Micro" Padding="10,0,0,0" TextColor="White"/>
+
+                                            <Label Text="{Binding MaxHealth}" 
+                                        Style="{StaticResource ListStyle}"
+                                        FontSize="Micro" TextColor="White"/>
+
+                                        </StackLayout>
+                                    </Grid>
+                                </StackLayout>
+
+                                
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:local="using:Game.Models"
+             xmlns:local_helpers="clr-namespace:Game.Helpers"
+             xmlns:local_enum="clr-namespace:Game.Models"
+             x:Class="Game.Views.ScoreCreatePage"
+             Title="{Binding Title}">
+
+    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local_helpers:StringEnumConverter x:Key="StringEnum"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <ScrollView>
+            <StackLayout Style="{StaticResource OuterBoxStack}"
+                Spacing="10">
+
+                <Label Text="Create Page" Style="{StaticResource HeaderStyle}"/>
+                
+                <Grid
+                    RowSpacing="1"
+                    ColumnSpacing="2"
+                    VerticalOptions="Center">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0"
+                            Text="Name" 
+                            Style="{StaticResource LabelStyle}"/>
+                        <Label Grid.Row="0" Grid.Column="1"
+                            Style="{StaticResource ValidationLabelStyle}" 
+                            x:Name="NameValidationLabel"/>
+                    </Grid>
+
+                    <Entry Grid.Row="0" Grid.Column="1"
+                            Text="{Binding Data.Name}"  
+                            x:Name="NameEntry"
+                            Style="{StaticResource EntryStyle}"
+                            TextChanged="NameEntry_Changed"/>
+
+                    <Entry Grid.Row="1" Grid.Column="1"
+                        Text="{Binding Data.MonsterSlainNumber}" 
+                        Style="{StaticResource EntryStyle}"
+                           TextChanged="OnEntryChange"/>
+
+                    <Label Grid.Row="1" Grid.Column="0"
+                        Text="Number of monsters slained" 
+                        Style="{StaticResource LabelStyle}"/>
+                    
+                    <Entry Grid.Row="2" Grid.Column="1"
+                        Text="{Binding Data.TurnCount}" 
+                        Style="{StaticResource EntryStyle}"
+                           TextChanged="OnEntryChange"/>
+
+                    <Label Grid.Row="2" Grid.Column="0"
+                        Text="Number of turns" 
+                        Style="{StaticResource LabelStyle}"/>
+                    
+                    <Entry Grid.Row="3" Grid.Column="1"
+                        Text="{Binding Data.RoundCount}" 
+                        Style="{StaticResource EntryStyle}"
+                           TextChanged="OnEntryChange"/>
+
+                    <Label Grid.Row="3" Grid.Column="0"
+                        Text="Number of rounds" 
+                        Style="{StaticResource LabelStyle}"/>
+                    
+                    <Entry Grid.Row="4" Grid.Column="1"
+                        Text="{Binding Data.ExperienceGainedTotal}" 
+                        Style="{StaticResource EntryStyle}"
+                           TextChanged="OnEntryChange"/>
+
+                    <Label Grid.Row="4" Grid.Column="0"
+                        Text="Total experience gained" 
+                        Style="{StaticResource LabelStyle}"/>
+                    <Label Grid.Row="5" Grid.Column="0"
+                           Text="Total Score:"
+                           Style="{StaticResource HeaderStyle}"/>
+                    <Label x:Name="ScoreLabel" 
+                           Grid.Row="5" Grid.Column="1"
+                           Text="{Binding Data.ScoreTotal}" 
+                           Style="{StaticResource HeaderStyle}"/>
+
+
+                </Grid>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button
+                        Text="Save"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Clicked="Save_Clicked"
+                        x:Name="SaveButton"/>
+
+                    <Button
+                        Text="Cancel"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Clicked="Cancel_Clicked"/>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

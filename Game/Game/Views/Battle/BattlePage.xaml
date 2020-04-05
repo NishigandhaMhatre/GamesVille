@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Game.Views.BattlePage"
+             x:Name="BattleScreen"
+             Title="Battle Time!">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MessageLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="DarkBlue"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <AbsoluteLayout
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            >
+            <StackLayout 
+                    Style="{StaticResource VerticalStack}"
+                    AbsoluteLayout.LayoutBounds="1,1,1,1" 
+                    AbsoluteLayout.LayoutFlags="All"
+                    HorizontalOptions="FillAndExpand">
+                <StackLayout
+                    Style="{StaticResource VerticalStack}"
+                    x:Name="GameUIDisplay" >
+                    <Grid x:Name="BattleGrid">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Frame x:Name ="Frame00" Grid.Row="0" Grid.Column="0" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame10" Grid.Row="1" Grid.Column="0" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame20" Grid.Row="2" Grid.Column="0" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame30" Grid.Row="3" Grid.Column="0" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame40" Grid.Row="4" Grid.Column="0" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame50" Grid.Row="5" Grid.Column="0" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+
+                        <Frame x:Name ="Frame05" Grid.Row="0" Grid.Column="5" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame15" Grid.Row="1" Grid.Column="5" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame25" Grid.Row="2" Grid.Column="5" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame35" Grid.Row="3" Grid.Column="5" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame45" Grid.Row="4" Grid.Column="5" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+                        <Frame x:Name ="Frame55" Grid.Row="5" Grid.Column="5" Style="{StaticResource BattleOutterFrameStyle}">
+                            <Frame Style="{StaticResource BattleInnerFrameStyle}"/>
+                        </Frame>
+
+                    </Grid>
+
+                    <!-- Game chat log -->
+                    <StackLayout
+                        Style="{StaticResource VerticalStack}" 
+                        HeightRequest="100"
+                        MinimumHeightRequest="100"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="End">
+                        <StackLayout x:Name="MessageDisplayBox" 
+                            IsVisible="true"
+                            Style="{StaticResource VerticalStack}"
+                                    VerticalOptions="StartAndExpand"
+                                    HorizontalOptions="CenterAndExpand">
+
+                            <Label x:Name="BattleMessages" 
+                                    HorizontalOptions="FillAndExpand" 
+                                    LineBreakMode="WordWrap" 
+                                    MaxLines="4"
+                                    LineHeight="1"
+                                    CharacterSpacing="1"
+                                    Style="{StaticResource MessageLabelStyle}"
+                                    FontSize="Micro"/>
+                        </StackLayout>
+                    </StackLayout>
+
+
+                    <StackLayout Orientation="Horizontal" HeightRequest="150" HorizontalOptions="CenterAndExpand">
+                        <Grid WidthRequest="150">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <ImageButton x:Name="BackwardButton" Source="backward_arrow.png" Grid.Row="1" Grid.Column="0" HorizontalOptions="End" Clicked="MoveBack_Clicked"/>
+                            <ImageButton x:Name="ForwardButton" Source="forward_arrow.png" Grid.Row="1" Grid.Column="2" HorizontalOptions="Start" Clicked="MoveFront_Clicked"/>
+                            <ImageButton x:Name="UpButton" Source="up_arrow.png" Grid.Row="0" Grid.Column="1" Clicked="MoveUp_Clicked"/>
+                            <ImageButton x:Name="DownButton" Source="down_arrow.png" Grid.Row="2" Grid.Column="1" Clicked="MoveDown_Clicked"/>
+                        </Grid>
+                        <Button x:Name="SpecialAbility" Clicked="SpecialAbilityButton_Clicked" Text="Special Ability" Style="{StaticResource PrimaryButtonStyle}"></Button>
+                        <Button Clicked="AttackButton_Clicked" Text="Attack" Style="{StaticResource PrimaryButtonStyle}"></Button>
+
+                    </StackLayout>
+                    
+
+                </StackLayout>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            </StackLayout>
+            <StackLayout 
+                    Style="{StaticResource VerticalStack}"
+                    AbsoluteLayout.LayoutBounds="1,1,1,1" 
+                    AbsoluteLayout.LayoutFlags="All"
+                    HorizontalOptions="FillAndExpand"
+                    x:Name="RoundOverDisplay" 
+                    IsVisible="false">
+
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="Round Over" Style="{StaticResource CenterMessageStyle}"/>
+
+                    <Label Text="Pick Dropped Items, or continue next round" Style="{StaticResource MessageStyle}" LineBreakMode="WordWrap" HorizontalTextAlignment="Center" MaxLines="5" Padding="20"/>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+
+                        <Button x:Name="PickItems" Clicked="PickItemsButton_Clicked" Text="PickItems" Style="{StaticResource PrimaryButtonStyle}"/>
+
+                        <Button x:Name="NextRound" Clicked="NextRoundButton_Clicked" Text="NextRound" Style="{StaticResource PrimaryButtonStyle}"></Button>
+
+                    </StackLayout>
+                    
+                </StackLayout>
+            </StackLayout>
+            <StackLayout 
+                    Style="{StaticResource VerticalStack}"
+                    AbsoluteLayout.LayoutBounds="1,1,1,1" 
+                    AbsoluteLayout.LayoutFlags="All"
+                    HorizontalOptions="FillAndExpand"
+                    x:Name="GameOverDisplay" 
+                    IsVisible="false">
+
+                <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <Label Text="Thank you for Playing" Style="{StaticResource CenterMessageStyle}"/>
+
+                    <Label Text="Check your score, or click Exit and return soon" Style="{StaticResource MessageStyle}" LineBreakMode="WordWrap" HorizontalTextAlignment="Center" MaxLines="5" Padding="20"/>
+
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+
+                        <Button x:Name="ShowScoreButton" Clicked="ShowScoreButton_Clicked" Text="Score" Style="{StaticResource PrimaryButtonStyle}"/>
+
+                        <Button x:Name="ExitButton" Clicked="ExitButton_Clicked" Text="Exit" Style="{StaticResource PrimaryButtonStyle}"></Button>
+
+                    </StackLayout>
+                    
+                </StackLayout>
+            </StackLayout>
+
+        </AbsoluteLayout>
+        
+    </ContentPage.Content>
+</ContentPage>
